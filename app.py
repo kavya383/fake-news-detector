@@ -12,7 +12,7 @@ vec_path = os.path.join(base_dir, "vectorizer.pkl")
 
 model = pickle.load(open(model_path, "rb"))
 vectorizer = pickle.load(open(vec_path, "rb"))
-@app.route('/', methods=['GET','POST])
+@app.route('/', methods=['GET','POST'])
 def home():
     return "Flask server is running!"
 def index():
