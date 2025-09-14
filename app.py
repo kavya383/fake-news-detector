@@ -23,4 +23,4 @@ def predict():
 
 if _name_ == '_main_':
     print("Starting local Flask server...")
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True)
