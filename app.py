@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-base_dir = os.path.dirname(os.path.abspath(_file_))
+base_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(base_dir, "model.pkl")
 vec_path = os.path.join(base_dir, "vectorizer.pkl")
 
