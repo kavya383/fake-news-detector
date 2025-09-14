@@ -15,14 +15,19 @@ vectorizer = pickle.load(open(vec_path, "rb"))
 @app.route('/', methods=['GET','POST'])
 def index():
     if request.method == 'GET':
-        return "Fake News Detector API is running! Send POST request with JSON {'news':'text'}"
-    data = request.get_json()
-    text = data.get('news', '')
-    if not text:
-        return jsonify({"error":"No news text provided"}),400
-    vec = vectorizer.transform([text])
+        return '''
+        <h2> Fake News Detector</h2>
+        <form method="POST">
+         <textarea name="news" rows="5" cols="40" placeholder="Enter news text"></textarea><br>
+         <input type="submit" value="Check News">
+        </form>
+        '''
+    news_text=request.form.get('news', '').strip()
+    if not news_text:
+        return "Please enter news text"
+    vec = vectorizer.transform([news_text])
     prediction = model.predict(vec)[0]
-    return jsonify({"result": "FAKE" if int(prediction) == 1 else "REAL"})
-
+    result= "FAKE" if int(prediction) == 1 else "REAL"
+    return f"<h3> Result: {result}</h3>"
 if __name__ == '__main__':
     app.run(debug=True)
