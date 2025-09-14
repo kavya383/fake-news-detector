@@ -3,7 +3,7 @@ from flask_cors import CORS
 import pickle
 import os
 
-app = Flask(_name_)
+app = Flask(__name__)
 CORS(app)
 
 base_dir = os.path.dirname(os.path.abspath(_file_))
@@ -21,6 +21,6 @@ def predict():
     prediction = model.predict(vec)[0]
     return jsonify({"result": "FAKE" if int(prediction) == 1 else "REAL"})
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     print("Starting local Flask server...")
     app.run(debug=True)
