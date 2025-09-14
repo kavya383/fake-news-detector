@@ -12,7 +12,10 @@ vec_path = os.path.join(base_dir, "vectorizer.pkl")
 
 model = pickle.load(open(model_path, "rb"))
 vectorizer = pickle.load(open(vec_path, "rb"))
-
+@app.route('/')
+def home():
+    return "Flask server is running!"
+    
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
@@ -22,5 +25,5 @@ def predict():
     return jsonify({"result": "FAKE" if int(prediction) == 1 else "REAL"})
 
 if __name__ == '__main__':
-    print("Starting local Flask server...")
+    print("Starting local Flask server on localhost...")
     app.run(debug=True)
